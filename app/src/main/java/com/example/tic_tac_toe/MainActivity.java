@@ -1,5 +1,6 @@
 package com.example.tic_tac_toe;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -124,12 +125,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 && !field[0][0].equals("")) {
             return true;
         }
-        if(field[0][2].equals(field[1][1])
+        return field[0][2].equals(field[1][1])
                 && field[0][2].equals(field[2][0])
-                && !field[2][0].equals("")) {
-            return true;
-        }
-        return false;
+                && !field[2][0].equals("");
     }
 
     private void resetGame() {
@@ -140,16 +138,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putInt("roundCount", roundCount);
         outState.putInt("player1Points", player1Points);
         outState.putInt("player2Points", player2Points);
         outState.putBoolean("player1Turn", player1Turn);
+        String[][] str = new String[3][3];
+        for(int i = 0; i < 3; i++)
+            for(int j = 0; j < 3; j++) {
+                str[i][j] = buttons[i][j].getText().toString();
+            }
+        outState.putStringArray("str0",str[0]);
+        outState.putStringArray("str1",str[1]);
+        outState.putStringArray("str2",str[2]);
     }
 
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+    public void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         roundCount = savedInstanceState.getInt("roundCount");
         player1Points = savedInstanceState.getInt("player1Points");
@@ -157,5 +163,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         player1Turn = savedInstanceState.getBoolean("player1Turn");
         player1.setText("Player 1: "+ player1Points);
         player2.setText("Player 2: "+ player2Points);
+        String[][] str ={savedInstanceState.getStringArray("str0")
+                ,savedInstanceState.getStringArray("str1")
+                ,savedInstanceState.getStringArray("str2")};
+        for(int i = 0; i < 3; i++)
+            for(int j = 0; j < 3; j++) {
+                assert str[i] != null;
+                buttons[i][j].setText(str[i][j]);
+            }
     }
 }
