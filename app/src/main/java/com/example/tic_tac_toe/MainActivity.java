@@ -150,6 +150,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             for(int j = 0; j < 3; j++) {
                 str[i][j] = buttons[i][j].getText().toString();
             }
+
         outState.putStringArray("str0",str[0]);
         outState.putStringArray("str1",str[1]);
         outState.putStringArray("str2",str[2]);
@@ -165,10 +166,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         player1.setText("Player 1: "+ player1Points);
         player2.setText("Player 2: "+ player2Points);
-        
+
         String[][] str ={savedInstanceState.getStringArray("str0")
                 ,savedInstanceState.getStringArray("str1")
                 ,savedInstanceState.getStringArray("str2")};
+
         for(int i = 0; i < 3; i++)
             for(int j = 0; j < 3; j++) {
                 assert str[i] != null;
