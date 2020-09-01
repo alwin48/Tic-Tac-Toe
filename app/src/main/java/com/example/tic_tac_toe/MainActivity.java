@@ -145,6 +145,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         outState.putInt("player2Points", player2Points);
         outState.putBoolean("player1Turn", player1Turn);
         String[][] str = new String[3][3];
+
         for(int i = 0; i < 3; i++)
             for(int j = 0; j < 3; j++) {
                 str[i][j] = buttons[i][j].getText().toString();
@@ -161,8 +162,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         player1Points = savedInstanceState.getInt("player1Points");
         player2Points = savedInstanceState.getInt("player2Points");
         player1Turn = savedInstanceState.getBoolean("player1Turn");
+
         player1.setText("Player 1: "+ player1Points);
         player2.setText("Player 2: "+ player2Points);
+        
         String[][] str ={savedInstanceState.getStringArray("str0")
                 ,savedInstanceState.getStringArray("str1")
                 ,savedInstanceState.getStringArray("str2")};
